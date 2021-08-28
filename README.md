@@ -1,6 +1,7 @@
 # RecoilSystem
 
 Using it is very simple.
+Just copy over the headers, then the code wherever u like, prefereably create a blank c++ class and do it.
 
 **Each step can be done in both c++ and blueprints:**
 
