@@ -2,6 +2,7 @@
 #include "Kismet/KismetStringLibrary.h"
 #include "Math/UnrealMathUtility.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Curves/CurveVector.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 UCLASS(Blueprintable)
