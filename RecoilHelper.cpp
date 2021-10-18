@@ -109,9 +109,11 @@ public:
 	UFUNCTION()
 		void RecoveryStart()
 	{
+	      if (PCRef->GetControlRotation().Pitch > RecoilStartRot.Pitch)
+	      {
 		bRecoilRecovery = true;
 		GetWorld()->GetTimerManager().SetTimer(RecoveryTimer, this, &URecoilHelper::RecoveryTimerFunction, RecoveryTime, false);
-
+              }
 	}
 	
 
@@ -160,9 +162,15 @@ public:
 		{
 		  //Recoil resetting
 			FRotator tmprot = PCRef->GetControlRotation();
-			PCRef->SetControlRotation(UKismetMathLibrary::RInterpTo(PCRef->GetControlRotation(), PCRef->GetControlRotation() - RecoilDeltaRot, DeltaTime, RecoverySpeed));
-			RecoilDeltaRot = RecoilDeltaRot + (PCRef->GetControlRotation() - tmprot);
-
+		if (tmprot.Pitch >= RecoilStartRot.Pitch)
+		{
+			PCRef->SetControlRotation(UKismetMathLibrary::RInterpTo(GetControlRotation(), GetControlRotation() - RecoilDeltaRot, DeltaTime, 10.0f));
+			RecoilDeltaRot = RecoilDeltaRot + (GetControlRotation() - tmprot);
+		}
+		else
+		{
+			RecoveryTimer.Invalidate();
+		}
 		}
 	}
 };
